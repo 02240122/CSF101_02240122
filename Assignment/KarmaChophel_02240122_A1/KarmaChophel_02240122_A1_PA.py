@@ -125,7 +125,7 @@ def main():
                 start = int(start)
                 end = int(end)
                 sum = prime_sum(start, end)
-                print(f"The total sum of prime numbers within the range[{start}, {end}]:you specified is: {sum}")
+                print(f"The total sum of prime numbers within the range({start}, {end}) you specified is: {sum}")
             else:
                 print("Invalid input!. Please enter integer values.")
                 continue
