@@ -153,3 +153,48 @@ def main():
         elif choice == 4:
             # Min-Max Number Finder
             numbers = input("Enter numbers separated by space: ").split()
+ 
+       
+            # Ensure all inputs are numeric
+            all_numeric = True
+            for num in numbers:
+                if not num.isdigit():
+                    all_numeric = False
+                    break
+
+            if all_numeric:
+                numbers = []
+                for num in numbers:
+                    numbers.append(int(num))  # Converting input manually
+                result = min_max_finder(*numbers)
+                print(result)
+            else:
+                print("Invalid input. Please enter numeric values.")
+                continue
+
+        elif choice == 5:
+            # Palindrome Checker
+            text = input("Enter a string: ")
+            result = palindrome_checker(text)
+            print(f"Is the string a palindrome? {result}")
+
+        elif choice == 6:
+            # Word Counter
+            filename = input("Enter the filename: ")
+            result = word_counter(filename)
+            print(f"Word counts: {result}")
+
+        # Ask if the user wants to continue
+        continue_choice = input("Would you like to try another function? (y/n): ").lower()
+
+        # Ensure response is valid
+        if continue_choice == 'y':
+            continue
+        elif continue_choice == 'n':
+            print("Exiting the program.")
+            break
+        else:
+            print("Invalid input. Please enter 'y' or 'n'.")
+
+# Run the program
+main()
