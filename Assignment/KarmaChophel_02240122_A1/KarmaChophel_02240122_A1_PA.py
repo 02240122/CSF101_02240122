@@ -121,7 +121,7 @@ def main():
             end = input("Enter the end range: ")
 
             # Ensure both inputs are numeric
-            if start.digit() and end.digit():
+            if start.isdigit() and end.isdigit():
                 start = int(start)
                 end = int(end)
                 sum = prime_sum(start, end)
