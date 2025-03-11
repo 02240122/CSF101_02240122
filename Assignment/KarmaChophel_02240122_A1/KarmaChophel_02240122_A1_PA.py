@@ -1,7 +1,7 @@
 # Function 1: Prime Number Sum Calculator
 def prime_sum(start, end):
     """Calculate the sum of prime numbers between start and end."""
-    def is_prime(n):
+    def prime_num(n):
         if n <= 1:
             return False
         for i in range(2, n):
@@ -11,7 +11,7 @@ def prime_sum(start, end):
     
     prime_sum = 0
     for num in range(start, end + 1):
-        if is_prime(num):
+        if prime_num(num):
             prime_sum += num
     return prime_sum
 
@@ -121,13 +121,13 @@ def main():
             end = input("Enter the end range: ")
 
             # Ensure both inputs are numeric
-            if start.isdigit() and end.isdigit():
+            if start.digit() and end.digit():
                 start = int(start)
                 end = int(end)
-                result = prime_sum(start, end)
-                print(f"Sum of prime numbers in the range [{start}, {end}]: {result}")
+                sum = prime_sum(start, end)
+                print(f"The total sum of prime numbers within the range you specified is: [{start}, {end}]: {sum}")
             else:
-                print("Invalid input. Please enter integer values.")
+                print("Invalid input!. Please enter integer values.")
                 continue
 
         elif choice == 2:
