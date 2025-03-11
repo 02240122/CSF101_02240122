@@ -96,4 +96,60 @@ def main():
         print("6. Word Counter")
         print("0. Exit program")
    
-   
+  # Get user choice
+        choice = input("Enter your choice: ")
+
+        # Check if choice is a valid number between 0 and 6
+        if choice.isdigit() and 0 <= int(choice) <= 6:
+            choice = int(choice)
+        else:
+            print("Invalid input. Please enter a number between 0 and 6.")
+            continue
+
+        # Use the range function to handle the menu selection logic
+        for i in range(1, 7):
+            if choice == i:
+                break
+        else:
+            if choice == 0:
+                print("Exiting the program.")
+                break
+
+        if choice == 1:
+            # Prime Number Sum Calculator
+            start = input("Enter the start range: ")
+            end = input("Enter the end range: ")
+
+            # Ensure both inputs are numeric
+            if start.isdigit() and end.isdigit():
+                start = int(start)
+                end = int(end)
+                result = prime_sum(start, end)
+                print(f"Sum of prime numbers in the range [{start}, {end}]: {result}")
+            else:
+                print("Invalid input. Please enter integer values.")
+                continue
+
+        elif choice == 2:
+            # Length Unit Converter
+            value = input("Enter the value: ")
+            direction = input("Enter direction (M for meters to feet, F for feet to meters): ").upper()
+
+            # Ensure value is numeric and direction is valid
+            if value.replace('.', '', 1).isdigit() and direction in ['M', 'F']:
+                value = float(value)
+                result = length_converter(value, direction)
+                print(f"Converted value: {result} units")
+            else:
+                print("Invalid input. Please enter a valid numeric value and direction (M/F).")
+                continue
+
+        elif choice == 3:
+            # Consonant Counter
+            text = input("Enter a string: ")
+            result = consonant_counter(text)
+            print(f"Number of consonants: {result}")
+
+        elif choice == 4:
+            # Min-Max Number Finder
+            numbers = input("Enter numbers separated by space: ").split()
