@@ -8,7 +8,7 @@ def prime_sum(start, end):
             if n % i == 0:
                 return False
         return True
-    
+
     prime_sum = 0
     for num in range(start, end + 1):
         if prime_num(num):
@@ -16,6 +16,8 @@ def prime_sum(start, end):
     return prime_sum
 
 # Function 2: Length Unit Converter
+
+
 def length_converter(value, direction):
     """Convert between meters and feet."""
     if direction == 'M':
@@ -26,6 +28,8 @@ def length_converter(value, direction):
         return "Invalid direction. Use 'M' or 'F'."
 
 # Function 3: Consonant Counter
+
+
 def consonant_counter(text):
     """Count the consonants in a given string."""
     consonants = "bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ"
@@ -36,6 +40,8 @@ def consonant_counter(text):
     return consonant_count
 
 # Function 4: Min-Max Number Finder
+
+
 def min_max_finder(*numbers):
     """Find the minimum and maximum numbers from a list of inputs."""
     if len(numbers) == 0:
@@ -49,6 +55,8 @@ def min_max_finder(*numbers):
     return f"Smallest: {smallest}, Largest: {largest}"
 
 # Function 5: Palindrome Checker
+
+
 def palindrome_checker(text):
     """Check if a given string is a palindrome."""
     cleaned_text = ''
@@ -58,11 +66,13 @@ def palindrome_checker(text):
     return cleaned_text == cleaned_text[::-1]
 
 # Function 6: Word Counter
+
+
 def word_counter(filename):
     """Count specific words in a text file."""
     words_to_count = ["the", "was", "and"]
     word_count = {}
-    
+
 # Initialize count for each word in the words_to_count list
     for word in words_to_count:
         word_count[word] = 0
@@ -72,8 +82,8 @@ def word_counter(filename):
         with open(filename, 'r') as file:
             text = file.read().lower()
             words = text.split()
-            
-            # Count each word manually (without using list comprehension or map)
+
+            # Count each word manually (without using list prehension or map)
             for word in words:
                 for key in word_count:
                     if word == key:
@@ -84,6 +94,8 @@ def word_counter(filename):
     return word_count
 
 # Main program
+
+
 def main():
     while True:
         # Display the menu
@@ -95,7 +107,7 @@ def main():
         print("5. Check for palindrome")
         print("6. Word Counter")
         print("0. Exit program")
-   
+
   # Get user choice
         choice = input("Enter your choice: ")
 
@@ -125,7 +137,8 @@ def main():
                 start = int(start)
                 end = int(end)
                 sum = prime_sum(start, end)
-                print(f"The total sum of prime numbers within the specified range ({start}, {end}) is:  {sum}")
+                print(
+                    f"The total sum of prime numbers within the specified range ({start}, {end}) is:  {sum}")
             else:
                 print("Invalid input!. Please enter integer values.")
                 continue
@@ -133,7 +146,8 @@ def main():
         elif choice == 2:
             # Length Unit Converter
             value = input("Enter the value: ")
-            direction = input("Enter direction (M for meters to feet, F for feet to meters): ").upper()
+            direction = input(
+                "Enter direction (M for meters to feet, F for feet to meters): ").upper()
 
             # Ensure value is numeric and direction is valid
             if value.replace('.', '', 1).isdigit() and direction in ['M', 'F']:
@@ -141,7 +155,8 @@ def main():
                 result = length_converter(value, direction)
                 print(f"Converted value: {result} units")
             else:
-                print("Invalid input. Please enter a valid numeric value and direction (M/F).")
+                print(
+                    "Invalid input. Please enter a valid numeric value and direction (M/F).")
                 continue
 
         elif choice == 3:
@@ -153,8 +168,7 @@ def main():
         elif choice == 4:
             # Min-Max Number Finder
             numbers = input("Enter numbers separated by space: ").split()
- 
-       
+
             # Ensure all inputs are numeric
             all_numeric = True
             for num in numbers:
@@ -185,7 +199,8 @@ def main():
             print(f"Word counts: {result}")
 
         # Ask if the user wants to continue
-        continue_choice = input("Would you like to try another function? (y/n): ").lower()
+        continue_choice = input(
+            "Would you like to try another function? (y/n): ").lower()
 
         # Ensure response is valid
         if continue_choice == 'y':
@@ -195,6 +210,7 @@ def main():
             break
         else:
             print("Invalid input. Please enter 'y' or 'n'.")
+
 
 # Run the program
 main()
