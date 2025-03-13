@@ -1,6 +1,5 @@
 # Function 1: Prime Number Sum Calculator
 def prime_sum(start, end):
-    """Calculate the sum of prime numbers between start and end."""
     def prime_num(n):
         if n <= 1:
             return False
@@ -19,7 +18,6 @@ def prime_sum(start, end):
 
 
 def length_converter(value, direction):
-    """Convert between meters and feet."""
     if direction == 'M':
         return round(value * 3.28084, 2)  # meters to feet
     elif direction == 'F':
@@ -69,7 +67,6 @@ def palindrome_checker(text):
 
 
 def word_counter(filename):
-    """Count specific words in a text file."""
     words_to_count = ["the", "was", "and"]
     word_count = {}
 
