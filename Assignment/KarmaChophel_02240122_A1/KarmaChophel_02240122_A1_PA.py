@@ -1,4 +1,4 @@
-# Function 1: Prime Number Sum Calculator
+# 1. Prime Number Sum Calculator
 def prime_sum(start, end):
     def prime_num(n):
         if n <= 1:
@@ -14,9 +14,7 @@ def prime_sum(start, end):
             prime_sum += num
     return prime_sum
 
-# Function 2: Length Unit Converter
-
-
+# 2. Length Unit Converter
 def length_converter(value, direction):
     if direction == 'M':
         return round(value * 3.28084, 2)  # meters to feet
@@ -25,9 +23,7 @@ def length_converter(value, direction):
     else:
         return "Invalid direction. Use 'M' or 'F'."
 
-# Function 3: Consonant Counter
-
-
+# 3. Consonant Counter
 def consonant_counter(text):
     """Count the consonants in a given string."""
     consonants = "bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ"
@@ -37,9 +33,7 @@ def consonant_counter(text):
             consonant_count += 1
     return consonant_count
 
-# Function 4: Min-Max Number Finder
-
-
+# 4. Min-Max Number Finder
 def min_max_finder(*numbers):
     """Find the minimum and maximum numbers from a list of inputs."""
     if len(numbers) == 0:
@@ -52,9 +46,7 @@ def min_max_finder(*numbers):
             largest = num
     return f"Smallest: {smallest}, Largest: {largest}"
 
-# Function 5: Palindrome Checker
-
-
+# 5. Palindrome Checker
 def palindrome_checker(text):
     """Check if a given string is a palindrome."""
     cleaned_text = ''
@@ -63,14 +55,12 @@ def palindrome_checker(text):
             cleaned_text += char.lower()
     return cleaned_text == cleaned_text[::-1]
 
-# Function 6: Word Counter
-
-
+# 6. Word Counter
 def word_counter(filename):
     words_to_count = ["the", "was", "and"]
     word_count = {}
 
-# Initialize count for each word in the words_to_count list
+    # Initialize count for each word in the words_to_count list
     for word in words_to_count:
         word_count[word] = 0
 
@@ -90,12 +80,8 @@ def word_counter(filename):
 
     return word_count
 
-# Main program
-
-
 def main():
     while True:
-        # Display the menu
         print("Select a function (1-6):")
         print("1. Calculate the sum of prime numbers")
         print("2. Convert length units")
@@ -105,17 +91,14 @@ def main():
         print("6. Word Counter")
         print("0. Exit program")
 
-  # Get user choice
         choice = input("Enter your choice: ")
 
-        # Check if choice is a valid number between 0 and 6
         if choice.isdigit() and 0 <= int(choice) <= 6:
             choice = int(choice)
         else:
             print("Invalid input. Please enter a number between 0 and 6.")
             continue
 
-        # Use the range function to handle the menu selection logic
         for i in range(1, 7):
             if choice == i:
                 break
@@ -166,7 +149,6 @@ def main():
             # Min-Max Number Finder
             numbers = input("Enter numbers separated by space: ").split()
 
-            # Ensure all inputs are numeric
             all_numeric = True
             for num in numbers:
                 if not num.isdigit():
@@ -195,11 +177,9 @@ def main():
             result = word_counter(filename)
             print(f"Word counts: {result}")
 
-        # Ask if the user wants to continue
         continue_choice = input(
             "Would you like to try another function? (y/n): ").lower()
 
-        # Ensure response is valid
         if continue_choice == 'y':
             continue
         elif continue_choice == 'n':
@@ -208,6 +188,4 @@ def main():
         else:
             print("Invalid input. Please enter 'y' or 'n'.")
 
-
-# Run the program
 main()
