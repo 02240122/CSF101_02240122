@@ -25,7 +25,6 @@ def length_converter(value, direction):
 
 # 3. Consonant Counter
 def consonant_counter(text):
-    """Count the consonants in a given string."""
     consonants = "bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ"
     consonant_count = 0
     for char in text:
@@ -60,23 +59,17 @@ def word_counter(filename):
     words_to_count = ["the", "was", "and"]
     word_count = {}
 
-    # Initialize count for each word in the words_to_count list
     for word in words_to_count:
         word_count[word] = 0
 
-    # Check if the file exists
-    try:
-        with open(filename, 'r') as file:
-            text = file.read().lower()
-            words = text.split()
+    with open(filename, 'r') as file:
+        text = file.read().lower()
+        words = text.split()
 
-            # Count each word manually (without using list prehension or map)
-            for word in words:
-                for key in word_count:
-                    if word == key:
-                        word_count[key] += 1
-    except FileNotFoundError:
-        return "File not found."
+        for word in words:
+            for x in word_count:
+                if word == x:
+                    word_count[x] += 1
 
     return word_count
 
