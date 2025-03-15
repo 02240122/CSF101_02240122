@@ -140,22 +140,23 @@ def main():
 
         elif choice == 4:
             # Min-Max Number Finder
-            numbers = input("Enter numbers separated by space: ").split()
+            numbers = input("Enter numbers separated by comma: ").split(',')
 
             all_numeric = True
+            processed_numbers = []
             for num in numbers:
-                if not num.isdigit():
+                num = num.strip()  # Remove any extra spaces
+                if num.replace('.', '', 1).lstrip('-').isdigit():  # Check if it's a valid number (including negative and floating-point)
+                    processed_numbers.append(float(num))  # Convert to float to handle both integers and decimals
+                else:
                     all_numeric = False
                     break
 
             if all_numeric:
-                numbers = []
-                for num in numbers:
-                    numbers.append(int(num))  # Converting input manually
-                result = min_max_finder(*numbers)
+                result = min_max_finder(*processed_numbers)
                 print(result)
             else:
-                print("Invalid input. Please enter numeric values.")
+                print("Invalid input. Please enter numeric values separated by commas.")
                 continue
 
         elif choice == 5:
