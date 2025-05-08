@@ -111,3 +111,46 @@ class ScoreSystem:
         print(f"Trivia Game: {self.g3.score}")
         print(f"Total Score: {self.g1.score + self.g2.score + self.g3.score}")
 
+class GameMenu:
+    """Game menu to choose functions"""
+    def __init__(self):
+        self.g1 = GuessNumberGame()
+        self.g2 = RockPaperScissorsGame()
+        self.g3 = TriviaGame()
+        self.score = ScoreSystem(self.g1, self.g2, self.g3)
+
+    def run(self):
+        while True:
+            print("\nSelect a function (0-5):")
+            print("1. Guess Number Game")
+            print("2. Rock Paper Scissors")
+            print("3. Trivia Game")
+            print("4. Pokemon Card Binder Manager (Part B)")
+            print("5. Show Score")
+            print("0. Exit")
+            choice = input("Enter your choice: ")
+
+            if choice == '1':
+                self.g1.play()
+            elif choice == '2':
+                self.g2.play()
+            elif choice == '3':
+                self.g3.play()
+            elif choice == '4':
+                print("Launching Pokemon Binder Manager... (see Part B file)")
+            elif choice == '5':
+                self.score.show()
+            elif choice == '0':
+                print("Goodbye!")
+                break
+            else:
+                print("Invalid input.")
+                continue
+
+            again = input("Would you like to try another function? (y/n): ").lower()
+            if again != 'y':
+                print("Thank you for playing!")
+                break
+
+if __name__ == "__main__":
+    GameMenu().run()
