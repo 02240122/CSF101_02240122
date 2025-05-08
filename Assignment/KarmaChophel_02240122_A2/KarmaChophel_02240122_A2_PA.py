@@ -1,5 +1,3 @@
-# YourName_YourStudentNumber_A2_PA.py
-
 import random
 
 class GuessNumberGame:
