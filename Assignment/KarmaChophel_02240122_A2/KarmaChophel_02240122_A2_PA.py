@@ -141,15 +141,15 @@ class GameMenu:
             elif choice == '5':
                 self.score.show()
             elif choice == '0':
-                print("Goodbye!")
+                print("Goodbye! Had a good time")
                 break
             else:
                 print("Invalid input.")
                 continue
 
-            again = input("Would you like to try another function? (y/n): ").lower()
+            again = input("Would you like to try another game (y/n): ").lower()
             if again != 'y':
-                print("Thank you for playing!")
+                print("Thank you for your time")
                 break
 
 if __name__ == "__main__":
