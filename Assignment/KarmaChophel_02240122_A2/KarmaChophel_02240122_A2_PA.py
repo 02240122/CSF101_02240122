@@ -1,7 +1,7 @@
 import random
 
 class GuessNumberGame:
-    """Guess a number between 1 and 10"""
+    """Guess a number between 1 and 10 without using try-except."""
     def __init__(self):
         self.score = 0
 
@@ -10,19 +10,20 @@ class GuessNumberGame:
         attempts = 0
         print("Guess a number between 1 and 10.")
         while True:
-            try:
-                guess = int(input("Your guess: "))
-                attempts += 1
-                if guess == number:
-                    print("Correct!")
-                    self.score += max(0, 10 - attempts)
-                    break
-                elif guess < number:
-                    print("Too low!")
-                else:
-                    print("Too high!")
-            except ValueError:
+            guess = input("Your guess: ")
+            if not guess.isdigit():
                 print("Invalid input. Please enter a number.")
+                continue
+            guess = int(guess)
+            attempts += 1
+            if guess == number:
+                print("Correct!")
+                self.score += max(0, 10 - attempts)
+                break
+            elif guess < number:
+                print("Too low!")
+            else:
+                print("Too high!")
 
 class RockPaperScissorsGame:
     """Play rock paper scissors against the computer"""
@@ -31,18 +32,20 @@ class RockPaperScissorsGame:
 
     def play(self):
         choices = ['rock', 'paper', 'scissors']
-        user = input("Choose rock, paper, or scissors: ").lower()
+        user = input("Pick one from rock, paper and scissors: ").lower()
         if user not in choices:
             print("Invalid choice.")
             return
         comp = random.choice(choices)
-        print(f"You chose: {user}")
-        print(f"Computer chose: {comp}")
+        print(f"You have picked: {user}")
+        print(f"Computer have picked: {comp}")
         if user == comp:
             print("It's a tie.")
-        elif (user == 'rock' and comp == 'scissors') or \
-             (user == 'scissors' and comp == 'paper') or \
-             (user == 'paper' and comp == 'rock'):
+        elif user == 'rock' and comp == 'scissors':
+             print("You win!")
+        elif user == 'scissors' and comp == 'paper':
+             print("You win!")
+        elif (user == 'paper' and comp == 'rock'):
             print("You win!")
             self.score += 1
         else:
@@ -57,29 +60,29 @@ class TriviaGame:
         questions = [
             {
                 "q": "Who was the first King of Bhutan?",
-                "a": "a", "options": {
-                    "a": "Ugyen Wangchuck",
-                    "b": "Jigme Wangchuck",
-                    "c": "Jigme Dorji Wangchuck",
-                    "d": "Jigme Singye Wangchuck"
+                "A": "A", "options": {
+                    "A": "Ugyen Wangchuck",
+                    "B": "Jigme Wangchuck",
+                    "C": "Jigme Dorji Wangchuck",
+                    "D": "Jigme Singye Wangchuck"
                 }
             },
             {
                 "q": "Which King introduced modern reforms in Bhutan?",
-                "a": "c", "options": {
-                    "a": "Jigme Khesar Namgyel Wangchuck",
-                    "b": "Jigme Singye Wangchuck",
-                    "c": "Jigme Dorji Wangchuck",
-                    "d": "Ugyen Wangchuck"
+                "A": "C", "options": {
+                    "A": "Jigme Khesar Namgyel Wangchuck",
+                    "B": "Jigme Singye Wangchuck",
+                    "C": "Jigme Dorji Wangchuck",
+                    "D": "Ugyen Wangchuck"
                 }
             },
             {
                 "q": "Who is the current King of Bhutan?",
-                "a": "d", "options": {
-                    "a": "Jigme Dorji Wangchuck",
-                    "b": "Jigme Singye Wangchuck",
-                    "c": "Ugyen Wangchuck",
-                    "d": "Jigme Khesar Namgyel Wangchuck"
+                "A": "D", "options": {
+                    "A": "Jigme Dorji Wangchuck",
+                    "B": "Jigme Singye Wangchuck",
+                    "C": "Ugyen Wangchuck",
+                    "D": "Jigme Khesar Namgyel Wangchuck"
                 }
             }
         ]
@@ -88,12 +91,12 @@ class TriviaGame:
             print(f"\nQ{i}: {q['q']}")
             for k, v in q['options'].items():
                 print(f"{k}) {v}")
-            ans = input("Your answer (a/b/c/d): ").lower()
-            if ans == q["a"]:
+            ans = input("Enter your option: ")
+            if ans == q["A"]:
                 print("Correct!")
                 self.score += 1
             else:
-                print(f"Incorrect! Correct answer: {q['a']}) {q['options'][q['a']]}")
+                print(f"Incorrect! Correct answer: {q['A']}) {q['options'][q['A']]}")
 
 class ScoreSystem:
     """Show total scores"""
