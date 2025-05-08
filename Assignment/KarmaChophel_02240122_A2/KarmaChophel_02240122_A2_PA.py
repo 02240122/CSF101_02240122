@@ -1,7 +1,7 @@
 import random
 
 class GuessNumberGame:
-    """Guess a number between 1 and 10 without using try-except."""
+    """Guess a number between 1 and 10 without hints or try-except."""
     def __init__(self):
         self.score = 0
 
@@ -20,138 +20,162 @@ class GuessNumberGame:
                 print("Correct!")
                 self.score += max(0, 10 - attempts)
                 break
-            elif guess < number:
-                print("Too low!")
             else:
-                print("Too high!")
+                print("Try your luck again")
+        return self.score
 
-class RockPaperScissorsGame:
-    """Play rock paper scissors against the computer"""
+
+
+class RockPaperScissors:
     def __init__(self):
+        self.choices = ["rock", "paper", "scissors"]
         self.score = 0
 
     def play(self):
-        choices = ['rock', 'paper', 'scissors']
-        user = input("Pick one from rock, paper and scissors: ").lower()
-        if user not in choices:
-            print("Invalid choice.")
-            return
-        comp = random.choice(choices)
-        print(f"You have picked: {user}")
-        print(f"Computer have picked: {comp}")
-        if user == comp:
-            print("It's a tie.")
-        elif user == 'rock' and comp == 'scissors':
-             print("You win!")
-        elif user == 'scissors' and comp == 'paper':
-             print("You win!")
-        elif (user == 'paper' and comp == 'rock'):
-            print("You win!")
-            self.score += 1
-        else:
-            print("You lose!")
+        print("Rock, Paper, Scissors Game!")
+        print("Let's play a best-of-three game")
+        for _ in range(3):
+            user = input("Enter rock, paper, or scissors: ").lower()
+            if user not in self.choices:
+                print("Invalid input.")
+                continue
+            comp = random.choice(self.choices)
+            print(f"Computer chose: {comp}")
+            if user == comp:
+                print("Draw")
+            elif user == "rock" and comp == "scissors":
+                 print("You win!")
+            elif user == "paper" and comp == "rock":
+                 print("You win!")
+            elif user == "scissors" and comp == "paper":
+                print("You win!")
+                self.score += 1
+            else:
+                print("You lose!")
+        print(f"Total wins: {self.score}")
+        return self.score
+
 
 class TriviaGame:
-    """Answer Bhutanese Kings trivia questions"""
+    """Trivia game about Bhutanese Kings with multiple choice questions."""
     def __init__(self):
         self.score = 0
 
     def play(self):
         questions = [
             {
-                "q": "Who was the first King of Bhutan?",
-                "A": "A", "options": {
+                "question": "Who was the first King of Bhutan?",
+                "options": {
                     "A": "Ugyen Wangchuck",
                     "B": "Jigme Wangchuck",
                     "C": "Jigme Dorji Wangchuck",
                     "D": "Jigme Singye Wangchuck"
-                }
+                },
+                "answer": "A"
             },
             {
-                "q": "Which King introduced modern reforms in Bhutan?",
-                "A": "C", "options": {
+                "question": "Which King introduced modern education and infrastructure in Bhutan?",
+                "options": {
                     "A": "Jigme Khesar Namgyel Wangchuck",
                     "B": "Jigme Singye Wangchuck",
                     "C": "Jigme Dorji Wangchuck",
                     "D": "Ugyen Wangchuck"
-                }
+                },
+                "answer": "C"
             },
             {
-                "q": "Who is the current King of Bhutan?",
-                "A": "D", "options": {
+                "question": "Who is the current King of Bhutan?",
+                "options": {
                     "A": "Jigme Dorji Wangchuck",
                     "B": "Jigme Singye Wangchuck",
                     "C": "Ugyen Wangchuck",
                     "D": "Jigme Khesar Namgyel Wangchuck"
-                }
+                },
+                "answer": "D"
             }
         ]
 
         for i, q in enumerate(questions, 1):
-            print(f"\nQ{i}: {q['q']}")
-            for k, v in q['options'].items():
-                print(f"{k}) {v}")
-            ans = input("Enter your option: ")
-            if ans == q["A"]:
+            print(f"\nQ{i}: {q['question']}")
+            for key, value in q['options'].items():
+                print(f"{key}) {value}")
+            user_ans = input("Enter your option(A/B/C/D): ").upper()
+            if user_ans == q['answer']:
                 print("Correct!")
                 self.score += 1
             else:
-                print(f"Incorrect! Correct answer: {q['A']}) {q['options'][q['A']]}")
+                correct_option = q['options'][q['answer']]
+                print(f"Incorrect! Correct answer: {q['answer']}) {correct_option}")
+        return self.score
 
-class ScoreSystem:
-    """Show total scores"""
-    def __init__(self, g1, g2, g3):
-        self.g1 = g1
-        self.g2 = g2
-        self.g3 = g3
 
-    def show(self):
-        print("\n--- Score Summary ---")
-        print(f"Guess Number: {self.g1.score}")
-        print(f"Rock Paper Scissors: {self.g2.score}")
-        print(f"Trivia Game: {self.g3.score}")
-        print(f"Total Score: {self.g1.score + self.g2.score + self.g3.score}")
+class PokemonManagerMini:
+    def play(self):
+        print("Welcome to Pokemon Card Binder Manager.")
+        return 0
+
+
+class ScoreTracker:
+    def __init__(self):
+        self.total_score = 0
+
+    def add_score(self, score):
+        self.total_score += score
+
+    def show_score(self):
+        print(f"Current Overall Score: {self.total_score}")
+
 
 class GameMenu:
-    """Game menu to choose functions"""
     def __init__(self):
-        self.g1 = GuessNumberGame()
-        self.g2 = RockPaperScissorsGame()
-        self.g3 = TriviaGame()
-        self.score = ScoreSystem(self.g1, self.g2, self.g3)
+        self.score_tracker = ScoreTracker()
 
     def run(self):
         while True:
             print("\nSelect a function (0-5):")
-            print("1. Guess Number Game")
-            print("2. Rock Paper Scissors")
-            print("3. Trivia Game")
-            print("4. Pokemon Card Binder Manager (Part B)")
-            print("5. Show Score")
-            print("0. Exit")
-            choice = input("Enter your choice: ")
+            print("1. Guess Number game")
+            print("2. Rock paper scissors game")
+            print("3. Trivia Pursuit Game")
+            print("4. Pokemon Card Binder Manager")
+            print("5. Check Current Overall score")
+            print("0. Exit program")
 
-            if choice == '1':
-                self.g1.play()
-            elif choice == '2':
-                self.g2.play()
-            elif choice == '3':
-                self.g3.play()
-            elif choice == '4':
-                print("Launching Pokemon Binder Manager... (see Part B file)")
-            elif choice == '5':
-                self.score.show()
-            elif choice == '0':
-                print("Goodbye! Had a good time")
+            choice = input("Enter your choice: ")
+            if choice == "1":
+                game = GuessNumberGame()
+                score = game.play()
+                self.score_tracker.add_score(score)
+            elif choice == "2":
+                game = RockPaperScissors()
+                score = game.play()
+                self.score_tracker.add_score(score)
+            elif choice == "3":
+                game = TriviaGame()
+                score = game.play()
+                self.score_tracker.add_score(score)
+            elif choice == "4":
+                game = PokemonManagerMini()
+                game.play()
+            elif choice == "5":
+                self.score_tracker.show_score()
+            elif choice == "0":
+                print("Exiting program.")
                 break
             else:
-                print("Invalid input.")
+                print("Invalid choice.")
                 continue
 
-            again = input("Would you like to try another game (y/n): ").lower()
-            if again != 'y':
-                print("Thank you for your time")
-                break
+            while True:
+                continue_choice = input("Would you like to try another function? (y/n): ").lower()
+                if continue_choice == 'y':
+                    break
+                elif continue_choice == 'n':
+                    print("Exiting the program.")
+                    return
+                else:
+                    print("Invalid input. Please enter 'y' or 'n'.")
+
 
 if __name__ == "__main__":
-    GameMenu().run()
+    menu = GameMenu()
+    menu.run()

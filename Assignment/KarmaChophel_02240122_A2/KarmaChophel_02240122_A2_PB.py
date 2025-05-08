@@ -1,86 +1,85 @@
-# YourName_YourStudentNumber_A2_PB.py
-
-class PokemonCard:
-    def __init__(self, pokedex_number):
-        self.pokedex_number = pokedex_number
-        self.page, self.row, self.col = self.calculate_position()
-
-    def calculate_position(self):
-        index = self.pokedex_number - 1
-        page = index // 64 + 1
-        pos = index % 64
-        row = pos // 8 + 1
-        col = pos % 8 + 1
-        return page, row, col
-
-class Binder:
+class PokemonBinder:
     def __init__(self):
         self.cards = {}
-        self.MAX = 1025
 
-    def add_card(self, number):
-        if number < 1 or number > self.MAX:
-            print("Invalid Pokedex number.")
-            return
-        if number in self.cards:
-            print("Status: Already exists.")
-        else:
-            card = PokemonCard(number)
-            self.cards[number] = card
-            print(f"Page: {card.page}")
-            print(f"Position: Row {card.row}, Column {card.col}")
-            print(f"Status: Added Pokedex #{number}")
+    def add_card(self, pokedex_num):
+        if not (1 <= pokedex_num <= 1025):
+            return "Invalid Pokedex number. Please enter a number between 1 and 1025."
 
-    def reset(self):
-        confirm = input("Type 'CONFIRM' to reset or 'EXIT' to cancel: ").upper()
-        if confirm == "CONFIRM":
-            self.cards.clear()
-            print("Binder reset successful.")
-        else:
-            print("Reset cancelled.")
+        if pokedex_num in self.cards:
+            page, row, col = self.cards[pokedex_num]
+            return f"Pokedex #{pokedex_num} already exists at Page {page}, Row {row}, Column {col}."
 
-    def view(self):
+        index = pokedex_num - 1
+        page = index // 64 + 1
+        position = index % 64
+        row = position // 8 + 1
+        col = position % 8 + 1
+        self.cards[pokedex_num] = (page, row, col)
+        return f"Page: {page}\nPosition: Row {row}, Column {col}\nStatus: Added Pokedex #{pokedex_num} to binder"
+
+    def reset_binder(self):
+        self.cards.clear()
+
+    def view_binder(self):
         if not self.cards:
-            print("Binder is empty.")
-        else:
-            print("Current Binder Contents:")
-            for num in sorted(self.cards):
-                card = self.cards[num]
-                print(f"Pokedex #{num}: Page {card.page}, Row {card.row}, Col {card.col}")
+            return "The binder is empty."
+
+        result = ["Current Binder Contents:\n------------------------"]
+        for num in sorted(self.cards):
+            page, row, col = self.cards[num]
+            result.append(f"Pokedex #{num}:\n  Page: {page}\n  Position: Row {row}, Column {col}")
+        result.append("------------------------")
         total = len(self.cards)
-        percent = round((total / self.MAX) * 100, 1)
-        print(f"Total cards: {total}")
-        print(f"Completion: {percent}%")
-        if total == self.MAX:
-            print("You have caught them all!!")
+        percent = round((total / 1025) * 100, 1)
+        result.append(f"Total cards in binder: {total}\n% completion: {percent}%")
+        if total == 1025:
+            result.append("You have caught them all!!")
+        return "\n".join(result)
 
-class BinderManager:
+    def get_total(self):
+        return len(self.cards)
+
+
+class PokemonBinderApp:
     def __init__(self):
-        self.binder = Binder()
+        self.binder = PokemonBinder()
 
-    def main_menu(self):
+    def run(self):
+        print("Welcome to Pokemon Card Binder Manager!")
         while True:
-            print("\nPokemon Card Binder Manager")
+            print("\nMain Menu:")
             print("1. Add Pokemon card")
             print("2. Reset binder")
-            print("3. View binder")
+            print("3. View current placements")
             print("4. Exit")
+
             choice = input("Select option: ")
-            if choice == '1':
+            if choice == "1":
                 try:
-                    num = int(input("Enter Pokedex number: "))
-                    self.binder.add_card(num)
+                    pokedex_number = int(input("Enter Pokedex number: "))
+                    print(self.binder.add_card(pokedex_number))
                 except ValueError:
-                    print("Please enter a valid integer.")
-            elif choice == '2':
-                self.binder.reset()
-            elif choice == '3':
-                self.binder.view()
-            elif choice == '4':
-                print("Thanks for using the Pokemon Card Binder Manager!")
+                    print("Invalid input. Please enter a valid number.")
+            elif choice == "2":
+                print("WARNING: This will delete ALL Pokemon cards from the binder.")
+                print("This action cannot be undone.")
+                confirm = input("Type 'CONFIRM' to reset or 'EXIT' to return to the Main Menu: ").upper()
+                if confirm == "CONFIRM":
+                    self.binder.reset_binder()
+                    print("The binder reset was successful! All cards have been removed.")
+                else:
+                    print("Binder reset cancelled.")
+            elif choice == "3":
+                print(self.binder.view_binder())
+            elif choice == "4":
+                print("Thank you for using Pokemon Card Binder Manager!")
+                print(f"Total cards collected: {self.binder.get_total()}")
                 break
             else:
-                print("Invalid choice.")
+                print("Invalid selection. Please enter a number from 1 to 4.")
+
 
 if __name__ == "__main__":
-    BinderManager().main_menu()
+    app = PokemonBinderApp()
+    app.run()
