@@ -46,7 +46,7 @@ class PokemonBinderApp:
         self.binder = PokemonBinder()
 
     def run(self):
-        print("Welcome to Pokemon Card Binder Manager!")
+        print("Welcome to Pokemon Card Binder Manager! Enjoy your time")
         while True:
             print("\nMain Menu:")
             print("1. Add Pokemon card")
