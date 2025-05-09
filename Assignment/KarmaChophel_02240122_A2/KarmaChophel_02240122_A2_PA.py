@@ -17,13 +17,12 @@ class GuessNumberGame:
             guess = int(guess)
             attempts += 1
             if guess == number:
-                print("Correct!")
+                print("Perfect! You nailed it")
                 self.score += max(0, 10 - attempts)
                 break
             else:
                 print("Try your luck again")
         return self.score
-
 
 
 class RockPaperScissors:
@@ -35,7 +34,7 @@ class RockPaperScissors:
         print("Rock, Paper, Scissors Game!")
         print("Let's play a best-of-three game")
         for _ in range(3):
-            user = input("Enter rock, paper, or scissors: ").lower()
+            user = input("Choose one from rock, paper and scissors: ").lower()
             if user not in self.choices:
                 print("Invalid input.")
                 continue
@@ -43,11 +42,9 @@ class RockPaperScissors:
             print(f"Computer chose: {comp}")
             if user == comp:
                 print("Draw")
-            elif user == "rock" and comp == "scissors":
-                 print("You win!")
-            elif user == "paper" and comp == "rock":
-                 print("You win!")
-            elif user == "scissors" and comp == "paper":
+            elif (user == "rock" and comp == "scissors") or \
+                 (user == "paper" and comp == "rock") or \
+                 (user == "scissors" and comp == "paper"):
                 print("You win!")
                 self.score += 1
             else:
@@ -158,6 +155,7 @@ class GameMenu:
                 game.play()
             elif choice == "5":
                 self.score_tracker.show_score()
+                continue
             elif choice == "0":
                 print("Exiting program.")
                 break
@@ -166,14 +164,17 @@ class GameMenu:
                 continue
 
             while True:
-                continue_choice = input("Would you like to try another function? (y/n): ").lower()
-                if continue_choice == 'y':
-                    break
-                elif continue_choice == 'n':
+                print("\nWould you like to return to the menu or exit the program?")
+                print("1. Return to Menu")
+                print("2. Exit Program")
+                user_choice = input("Enter your choice (1 or 2): ")
+                if user_choice == "1":
+                    break  # return to menu
+                elif user_choice == "2":
                     print("Exiting the program.")
                     return
                 else:
-                    print("Invalid input. Please enter 'y' or 'n'.")
+                    print("Invalid input. Please enter 1 or 2.")
 
 
 if __name__ == "__main__":
