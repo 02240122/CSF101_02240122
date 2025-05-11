@@ -1,7 +1,7 @@
 import random
 
 class GuessNumberGame:
-    """Guess a number between 1 and 10 without hints or try-except."""
+    #Guess a number game
     def __init__(self):
         self.score = 0
 
@@ -24,7 +24,7 @@ class GuessNumberGame:
                 print("Try your luck again")
         return self.score
 
-
+#Rock, paper and scissors game
 class RockPaperScissors:
     def __init__(self):
         self.choices = ["rock", "paper", "scissors"]
@@ -42,9 +42,11 @@ class RockPaperScissors:
             print(f"Computer chose: {comp}")
             if user == comp:
                 print("Draw")
-            elif (user == "rock" and comp == "scissors") or \
-                 (user == "paper" and comp == "rock") or \
-                 (user == "scissors" and comp == "paper"):
+            elif (user == "rock" and comp == "scissors"):
+                print("You win!")
+            elif (user == "paper" and comp == "rock"):
+                print("You win!")
+            elif (user == "scissors" and comp == "paper"):
                 print("You win!")
                 self.score += 1
             else:
@@ -54,7 +56,7 @@ class RockPaperScissors:
 
 
 class TriviaGame:
-    """Trivia game about Bhutanese Kings with multiple choice questions."""
+    #Trivia game
     def __init__(self):
         self.score = 0
 
@@ -108,19 +110,32 @@ class TriviaGame:
 
 class PokemonManagerMini:
     def play(self):
-        print("Welcome to Pokemon Card Binder Manager.")
+        print("Welcome to Pokemon Card Binder Manager.You can try in Part B, enjoy your time with us")
         return 0
 
 
 class ScoreTracker:
     def __init__(self):
         self.total_score = 0
+        self.guess_score = 0
+        self.rps_score = 0
+        self.trivia_score = 0
 
-    def add_score(self, score):
+    def add_score(self, game_name, score):
         self.total_score += score
+        if game_name == "guess":
+            self.guess_score += score
+        elif game_name == "rps":
+            self.rps_score += score
+        elif game_name == "trivia":
+            self.trivia_score += score
 
     def show_score(self):
-        print(f"Current Overall Score: {self.total_score}")
+        print("\n*** Current Scores ***")
+        print(f"Guess Number Game Score: {self.guess_score}")
+        print(f"Rock Paper Scissors Score: {self.rps_score}")
+        print(f"Trivia Game Score: {self.trivia_score}")
+        print(f"Total Overall Score: {self.total_score}")
 
 
 class GameMenu:
@@ -141,15 +156,15 @@ class GameMenu:
             if choice == "1":
                 game = GuessNumberGame()
                 score = game.play()
-                self.score_tracker.add_score(score)
+                self.score_tracker.add_score("guess", score)
             elif choice == "2":
                 game = RockPaperScissors()
                 score = game.play()
-                self.score_tracker.add_score(score)
+                self.score_tracker.add_score("rps", score)
             elif choice == "3":
                 game = TriviaGame()
                 score = game.play()
-                self.score_tracker.add_score(score)
+                self.score_tracker.add_score("trivia", score)
             elif choice == "4":
                 game = PokemonManagerMini()
                 game.play()
@@ -167,7 +182,7 @@ class GameMenu:
                 print("\nWould you like to return to the menu or exit the program?")
                 print("1. Return to Menu")
                 print("2. Exit Program")
-                user_choice = input("Enter your choice (1 or 2): ")
+                user_choice = input("Please choose one from above: ")
                 if user_choice == "1":
                     break  # return to menu
                 elif user_choice == "2":
