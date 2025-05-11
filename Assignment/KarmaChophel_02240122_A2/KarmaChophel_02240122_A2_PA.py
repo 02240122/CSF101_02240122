@@ -1,7 +1,7 @@
 import random
 
 class GuessNumberGame:
-    #Guess a number game
+#Guess a number
     def __init__(self):
         self.score = 0
 
@@ -24,7 +24,7 @@ class GuessNumberGame:
                 print("Try your luck again")
         return self.score
 
-#Rock, paper and scissors game
+
 class RockPaperScissors:
     def __init__(self):
         self.choices = ["rock", "paper", "scissors"]
@@ -56,43 +56,40 @@ class RockPaperScissors:
 
 
 class TriviaGame:
-    #Trivia game
+#Trivia game with multiple categories and multiple choice questions.
     def __init__(self):
         self.score = 0
 
     def play(self):
-        questions = [
-            {
-                "question": "Who was the first King of Bhutan?",
-                "options": {
-                    "A": "Ugyen Wangchuck",
-                    "B": "Jigme Wangchuck",
-                    "C": "Jigme Dorji Wangchuck",
-                    "D": "Jigme Singye Wangchuck"
-                },
-                "answer": "A"
-            },
-            {
-                "question": "Which King introduced modern education and infrastructure in Bhutan?",
-                "options": {
-                    "A": "Jigme Khesar Namgyel Wangchuck",
-                    "B": "Jigme Singye Wangchuck",
-                    "C": "Jigme Dorji Wangchuck",
-                    "D": "Ugyen Wangchuck"
-                },
-                "answer": "C"
-            },
-            {
-                "question": "Who is the current King of Bhutan?",
-                "options": {
-                    "A": "Jigme Dorji Wangchuck",
-                    "B": "Jigme Singye Wangchuck",
-                    "C": "Ugyen Wangchuck",
-                    "D": "Jigme Khesar Namgyel Wangchuck"
-                },
-                "answer": "D"
-            }
-        ]
+        categories = {
+            "1": ("Bhutanese Kings", [
+                {"question": "Who was the first King of Bhutan?", "options": {"A": "Ugyen Wangchuck", "B": "Jigme Wangchuck", "C": "Jigme Dorji Wangchuck", "D": "Jigme Singye Wangchuck"}, "answer": "A"},
+                {"question": "Which King introduced modern education and infrastructure in Bhutan?", "options": {"A": "Jigme Khesar Namgyel Wangchuck", "B": "Jigme Singye Wangchuck", "C": "Jigme Dorji Wangchuck", "D": "Ugyen Wangchuck"}, "answer": "C"},
+                {"question": "Who is the current King of Bhutan?", "options": {"A": "Jigme Dorji Wangchuck", "B": "Jigme Singye Wangchuck", "C": "Ugyen Wangchuck", "D": "Jigme Khesar Namgyel Wangchuck"}, "answer": "D"}
+            ]),
+            "2": ("Science", [
+                {"question": "What planet is known as the Red Planet?", "options": {"A": "Earth", "B": "Mars", "C": "Venus", "D": "Jupiter"}, "answer": "B"},
+                {"question": "What gas do plants absorb from the atmosphere?", "options": {"A": "Oxygen", "B": "Hydrogen", "C": "Carbon Dioxide", "D": "Nitrogen"}, "answer": "C"},
+                {"question": "Which organ pumps blood through the body?", "options": {"A": "Lungs", "B": "Brain", "C": "Heart", "D": "Kidneys"}, "answer": "C"}
+            ]),
+            "3": ("Sports", [
+                {"question": "How many players are on a soccer team?", "options": {"A": "9", "B": "10", "C": "11", "D": "12"}, "answer": "C"},
+                {"question": "Which sport uses a bat, ball, and bases?", "options": {"A": "Cricket", "B": "Baseball", "C": "Golf", "D": "Hockey"}, "answer": "B"},
+                {"question": "Who is known as the fastest man in the world?", "options": {"A": "Usain Bolt", "B": "Cristiano Ronaldo", "C": "Michael Phelps", "D": "LeBron James"}, "answer": "A"}
+            ])
+        }
+
+        print("Select a Trivia Category:")
+        for key, (name, _) in categories.items():
+            print(f"{key}. {name}")
+
+        choice = input("Enter your choice (1/2/3): ")
+        if choice not in categories:
+            print("Invalid category choice.")
+            return 0
+
+        category_name, questions = categories[choice]
+        print(f"\nCategory Selected: {category_name}")
 
         for i, q in enumerate(questions, 1):
             print(f"\nQ{i}: {q['question']}")
@@ -105,12 +102,13 @@ class TriviaGame:
             else:
                 correct_option = q['options'][q['answer']]
                 print(f"Incorrect! Correct answer: {q['answer']}) {correct_option}")
+
         return self.score
 
 
 class PokemonManagerMini:
     def play(self):
-        print("Welcome to Pokemon Card Binder Manager.You can try in Part B, enjoy your time with us")
+        print("Welcome to Pokemon Card Binder Manager.")
         return 0
 
 
@@ -131,7 +129,7 @@ class ScoreTracker:
             self.trivia_score += score
 
     def show_score(self):
-        print("\n*** Current Scores ***")
+        print("\n--- Current Scores ---")
         print(f"Guess Number Game Score: {self.guess_score}")
         print(f"Rock Paper Scissors Score: {self.rps_score}")
         print(f"Trivia Game Score: {self.trivia_score}")
@@ -182,7 +180,7 @@ class GameMenu:
                 print("\nWould you like to return to the menu or exit the program?")
                 print("1. Return to Menu")
                 print("2. Exit Program")
-                user_choice = input("Please choose one from above: ")
+                user_choice = input("Enter your choice (1 or 2): ")
                 if user_choice == "1":
                     break  # return to menu
                 elif user_choice == "2":
