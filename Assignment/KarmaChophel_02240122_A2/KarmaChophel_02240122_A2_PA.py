@@ -63,19 +63,29 @@ class TriviaGame:
     def play(self):
         categories = {
             "1": ("Bhutanese Kings", [
-                {"question": "Who was the first King of Bhutan?", "options": {"A": "Ugyen Wangchuck", "B": "Jigme Wangchuck", "C": "Jigme Dorji Wangchuck", "D": "Jigme Singye Wangchuck"}, "answer": "A"},
-                {"question": "Which King introduced modern education and infrastructure in Bhutan?", "options": {"A": "Jigme Khesar Namgyel Wangchuck", "B": "Jigme Singye Wangchuck", "C": "Jigme Dorji Wangchuck", "D": "Ugyen Wangchuck"}, "answer": "C"},
-                {"question": "Who is the current King of Bhutan?", "options": {"A": "Jigme Dorji Wangchuck", "B": "Jigme Singye Wangchuck", "C": "Ugyen Wangchuck", "D": "Jigme Khesar Namgyel Wangchuck"}, "answer": "D"}
+                {"question": "Who was the first King of Bhutan?", "options": {"A": "Ugyen Wangchuck",
+         "B": "Jigme Wangchuck", "C": "Jigme Dorji Wangchuck", "D": "Jigme Singye Wangchuck"}, "answer": "A"},
+                {"question": "Which King introduced modern education and infrastructure in Bhutan?", "options": {"A": 
+                 "Jigme Khesar Namgyel Wangchuck", "B": "Jigme Singye Wangchuck", "C": "Jigme Dorji Wangchuck",
+                "D": "Ugyen Wangchuck"}, "answer": "C"},
+                {"question": "Who is the current King of Bhutan?", "options": {"A": "Jigme Dorji Wangchuck", 
+                "B": "Jigme Singye Wangchuck", "C": "Ugyen Wangchuck", "D": "Jigme Khesar Namgyel Wangchuck"}, "answer": "D"}
             ]),
             "2": ("Science", [
-                {"question": "What planet is known as the Red Planet?", "options": {"A": "Earth", "B": "Mars", "C": "Venus", "D": "Jupiter"}, "answer": "B"},
-                {"question": "What gas do plants absorb from the atmosphere?", "options": {"A": "Oxygen", "B": "Hydrogen", "C": "Carbon Dioxide", "D": "Nitrogen"}, "answer": "C"},
-                {"question": "Which organ pumps blood through the body?", "options": {"A": "Lungs", "B": "Brain", "C": "Heart", "D": "Kidneys"}, "answer": "C"}
+                {"question": "What planet is known as the Red Planet?", "options": {"A": "Earth", "B": "Mars", "C": "Venus",
+                 "D": "Jupiter"}, "answer": "B"},
+                {"question": "What gas do plants absorb from the atmosphere?", "options": {"A": "Oxygen", "B": "Hydrogen", 
+                "C": "Carbon Dioxide", "D": "Nitrogen"}, "answer": "C"},
+                {"question": "Which organ pumps blood through the body?", "options": {"A": "Lungs", "B": "Brain", 
+                "C": "Heart", "D": "Kidneys"}, "answer": "C"}
             ]),
             "3": ("Sports", [
-                {"question": "How many players are on a soccer team?", "options": {"A": "9", "B": "10", "C": "11", "D": "12"}, "answer": "C"},
-                {"question": "Which sport uses a bat, ball, and bases?", "options": {"A": "Cricket", "B": "Baseball", "C": "Golf", "D": "Hockey"}, "answer": "B"},
-                {"question": "Who is known as the fastest man in the world?", "options": {"A": "Usain Bolt", "B": "Cristiano Ronaldo", "C": "Michael Phelps", "D": "LeBron James"}, "answer": "A"}
+                {"question": "How many players are on a soccer team?", "options": {"A": "9", "B": "10", "C": "11", "D": "12"},
+                "answer": "C"},
+                {"question": "Which sport uses a bat, ball, and bases?", "options": {"A": "Cricket", "B": "Baseball",
+                 "C": "Golf", "D": "Hockey"}, "answer": "B"},
+                {"question": "Who is known as the fastest man in the world?", "options": {"A": "Usain Bolt", 
+                "B": "Cristiano Ronaldo", "C": "Michael Phelps", "D": "LeBron James"}, "answer": "A"}
             ])
         }
 
@@ -164,8 +174,10 @@ class GameMenu:
                 score = game.play()
                 self.score_tracker.add_score("trivia", score)
             elif choice == "4":
-                game = PokemonManagerMini()
-                game.play()
+                # Importing and running Part B app only when needed
+                from KarmaChophel_02240122_A2_PB import PokemonBinderApp
+                app = PokemonBinderApp()
+                app.run()
             elif choice == "5":
                 self.score_tracker.show_score()
                 continue
